@@ -1,7 +1,12 @@
 <div>
     <div class="flex flex-row">
-        <div class="basis-2/3 text-2xl mr-5">
-            <span class="text-lg font-medium text-gray-600 dark:text-white mb-5">Lista de articulos</span>
+        <div class="mr-5 text-2xl basis-2/3">
+            <span class="mb-5 text-lg font-medium text-gray-600 mr-52 dark:text-white">Lista de articulos</span>
+            <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="relative ml-52 inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                    Agregar Articulo
+                </span>
+            </button>
             <div class="relative overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
@@ -51,17 +56,17 @@
                     </tbody>
                     <tfoot>
                         <tr class="font-semibold text-gray-900 dark:text-white">
-                            <th scope="row" class="px-6 py-3 text-base">Total</th>
-                            <td class="px-6 py-3">3</td>
-                            <td class="px-6 py-3">21,000</td>
+                            <th scope="row" class="px-6 py-3 text-base">Totales</th>
+                            <td class="px-6 py-3"></td>
+                            <td class="px-6 py-3">{{$itemsQuantity}}</td>
+                            <td class="px-6 py-3">{{$total}}</td>
                         </tr>
                     </tfoot>
                 </table>
             </div>
-
         </div>
-        <div class="basis-1/3 text-2xl">
-            <span class="text-lg font-medium text-gray-600 dark:text-white mb-5">Datos de Entrada</span>
+        <div class="text-2xl basis-1/3">
+            <span class="mb-5 text-lg font-medium text-gray-600 dark:text-white">Datos de Entrada</span>
             <div class="grid gap-6 mb-6 md:grid-cols-1">
                 <div>
                     <label for="proveedor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre Proveedor</label>
@@ -178,4 +183,5 @@
             </div>
         </div>
     </div>
+    @include('livewire.storehouse.warehouse.form')
 </div>
