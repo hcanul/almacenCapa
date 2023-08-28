@@ -11,7 +11,7 @@ class EntriesController extends Component
 {
     public $proveedor, $nomComer, $fecha, $fol_entrada, $factura, $nFactura, $ordenCompra, $depSolici, $nReq, $oSolicitante, $tCompraContrato, $nombrerecibe, $observciones;
 
-    public $search, $article;
+    public $search, $article=[];
 
     public $total, $itemsQuantity, $cart=[], $componentName, $selected_id, $pagination=10;
 

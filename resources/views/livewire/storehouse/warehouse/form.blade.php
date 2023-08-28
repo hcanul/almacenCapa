@@ -45,5 +45,6 @@
             </table>
         </div>
     <div>
+    {{$data->links()}}
 </form>
 @include('common.buscar.footerModal')

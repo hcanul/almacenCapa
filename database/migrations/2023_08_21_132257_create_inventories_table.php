@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('numInv', 15);
             $table->string('descripcion', 100);
-            $table->integer('family_id');
+            $table->integer('family_id')->nullable();
             $table->integer('measurementunits_id');
             $table->float('existencia');
             $table->float('exisInicial');
