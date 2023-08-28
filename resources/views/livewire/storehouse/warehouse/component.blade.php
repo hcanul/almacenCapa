@@ -185,4 +185,5 @@
         </div>
     </div>
     @include('livewire.storehouse.warehouse.form')
+    @include('livewire.storehouse.warehouse.formEditar')
 </div>
