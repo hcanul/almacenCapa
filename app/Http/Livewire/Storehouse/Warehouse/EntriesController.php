@@ -195,44 +195,51 @@ class EntriesController extends Component
 
     public function Store()
     {
-        $this->validate($this->rules, $this->messages);
+        // $this->validate($this->rules, $this->messages);
 
-        $entrada = WarehouseEntry::create([
-            'proveedor' => $this->proveedor,
-            'nomComer' => $this->nomComer,
-            'fecha' => $this->fecha,
-            'fol_entrada' => $this->fol_entrada,
-            'factura' => $this->factura,
-            'nFactura' => $this->nFactura,
-            'ordenCompra' => $this->ordenCompra,
-            'depSolici' => $this->depSolici,
-            'nReq' => $this->nReq,
-            'oSolicitante' => $this->oSolicitante,
-            'tCompraContrato' => $this->tCompraContrato,
-            'nombrerecibe' => $this->nombrerecibe,
-            'observaciones' => $this->observaciones,
-            'total' => $this->total
-        ]);
+        // $entrada = WarehouseEntry::create([
+        //     'proveedor' => $this->proveedor,
+        //     'nomComer' => $this->nomComer,
+        //     'fecha' => $this->fecha,
+        //     'fol_entrada' => $this->fol_entrada,
+        //     'factura' => $this->factura,
+        //     'nFactura' => $this->nFactura,
+        //     'ordenCompra' => $this->ordenCompra,
+        //     'depSolici' => $this->depSolici,
+        //     'nReq' => $this->nReq,
+        //     'oSolicitante' => $this->oSolicitante,
+        //     'tCompraContrato' => $this->tCompraContrato,
+        //     'nombrerecibe' => $this->nombrerecibe,
+        //     'observaciones' => $this->observaciones,
+        //     'total' => $this->total
+        // ]);
 
-        foreach ($this->cart as $value) {
-            $inventa = Inventory::find($value['id']);
-            WarehouseProduct::create([
-                'warehouse_entries_id' => $entrada->id,
-                'inventory_id' => $value['id'],
-                'numInv' => $inventa->numInv,
-                'cantidad' => $value['quantity'],
-                'measurementunits_id' => $inventa->measurementunits_id,
-                'descripcion' => $value['name'],
-                'pUnit' => $value['price'],
-                'total' => $value['quantity'] * $value['price'],
-                'ordenCompra' => $entrada->ordenCompra
-            ]);
-           $inventa->Update(['existencia'=> $inventa->existencia + $value['quantity']]);
-        }
+        // foreach ($this->cart as $value) {
+        //     $inventa = Inventory::find($value['id']);
+        //     WarehouseProduct::create([
+        //         'warehouse_entries_id' => $entrada->id,
+        //         'inventory_id' => $value['id'],
+        //         'numInv' => $inventa->numInv,
+        //         'cantidad' => $value['quantity'],
+        //         'measurementunits_id' => $inventa->measurementunits_id,
+        //         'descripcion' => $value['name'],
+        //         'pUnit' => $value['price'],
+        //         'total' => $value['quantity'] * $value['price'],
+        //         'ordenCompra' => $entrada->ordenCompra
+        //     ]);
+        //    $inventa->Update(['existencia'=> $inventa->existencia + $value['quantity']]);
+        // }
+
+        $data = [
+            'nombre' => 'hugo',
+            'apellido' => 'paulino',
+        ];
+        $this->topdf($data);
     }
 
-    public function topdf()
+    public function topdf($data)
     {
-        $pdf = PDF::loadView();
+
+        return Pdf::loadFile(public_path().'/entrada.html')->stream('download.pdf');
     }
 }
