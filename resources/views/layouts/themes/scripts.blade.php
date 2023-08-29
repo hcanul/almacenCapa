@@ -1,9 +1,9 @@
 <!-- Scripts -->
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-{{-- <script src="{{ asset('plugins/notification/snackbar/snackbar.min.js')}}"></script> --}}
+<script src="{{ asset('plugins/notification/snackbar/snackbar.min.js')}}"></script>
 <script src="{{ asset('plugins/sweetalerts/sweetalert2.min.js')}}"></script>
 
-{{-- <script>
+<script>
     function noty(msg, option = 1)
     {
         Snackbar.show({
@@ -14,4 +14,4 @@
             pos: 'top-right'
         });
     }
-</script> --}}
+</script>

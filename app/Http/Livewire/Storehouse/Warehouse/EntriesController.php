@@ -15,7 +15,7 @@ class EntriesController extends Component
 
     public $proveedor, $nomComer, $fecha, $fol_entrada, $factura, $nFactura, $ordenCompra, $depSolici, $nReq, $oSolicitante, $tCompraContrato, $nombrerecibe, $observciones;
 
-    public $search, $article=[], $cantidad=[];
+    public $search, $article=[], $cantidad=[], $editId, $editName, $editCosto, $editQty;
 
     public $total, $itemsQuantity, $cart=[], $componentName, $selected_id, $pagination=10;
 
@@ -32,6 +32,10 @@ class EntriesController extends Component
         $this->itemsQuantity = Cart::getTotalQuantity();
         $this->componentName = 'BUSQUEDA ARTICULOS';
         $this->selected_id = null;
+        $this->editId = null;
+        $this->editName = null;
+        $this->editCosto = null;
+        $this->editQty = null;
     }
 
     public function render()
@@ -66,6 +70,10 @@ class EntriesController extends Component
         $this->itemsQuantity = Cart::getTotalQuantity();
         $this->componentName = 'BUSQUEDA ARTICULOS';
         $this->selected_id = null;
+        $this->editId = null;
+        $this->editName = null;
+        $this->editCosto = null;
+        $this->editQty = null;
         $this->resetValidation();
         $this->resetPage();
     }
@@ -82,8 +90,22 @@ class EntriesController extends Component
         $this->cart = Cart::getContent()->sortBy('name');
     }
 
-    Public function Editar()
+    public function Editar($id)
     {
+        $this->componentName = 'EDITAR ARTICULOS';
+        $this->selected_id = $id;
+        $data = Cart::get($id);
+        $this->editId = $data->id;
+        $this->editName = $data->name;
+        $this->editCosto = $data->price;
+        $this->editQty = $data->quantity;
+    }
 
+    public function Update()
+    {
+        Cart::update($this->selected_id, array('quantity' => $this->editQty));
+        $this->resetUI();
+        session()->flash('message', "Articulo Modificado con exito");
+        $this->emit('item-updated', 'Articulo modificado exitosamente!');
     }
 }

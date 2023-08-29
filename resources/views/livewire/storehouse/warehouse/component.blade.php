@@ -1,12 +1,40 @@
 <div>
     <div class="flex flex-row">
         <div class="mr-5 text-2xl basis-2/3">
-            <span class="mb-5 text-lg font-medium text-gray-600 mr-52 dark:text-white">Lista de articulos</span>
-            <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="relative ml-52 inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                    Agregar Articulo
-                </span>
-            </button>
+            <div class="flex justify-between">
+                <div>
+                    <span class="mb-5 text-lg font-medium text-gray-600 mr-52 dark:text-white">LISTA DE MATERIALES</span>
+                </div>
+                <div>
+                    <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                        <span class="relative px-3 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                            AGREGAR ARTICULO
+                        </span>
+                    </button>
+                </div>
+            </div>
+            @if (session()->has('message'))
+                <div  class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
+                    <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <span class="sr-only">Info</span>
+                    <div>
+                    <span class="font-medium">{{ session('message') }}</span>
+                    </div>
+                </div>
+            @endif
+            @if (session()->has('delete'))
+                <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
+                    <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <span class="sr-only">Info</span>
+                    <div>
+                    <span class="font-medium">{{ session('delete') }}</span>
+                    </div>
+                </div>
+            @endif
             <div class="relative overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
@@ -39,7 +67,6 @@
                                 </th>
                                 <td class="px-6 py-4">
                                     {{$item->quantity}}
-                                    {{-- <input type="number" wire:model="cantidad.{{$item->id}}" name="{{$item->id}}" id="{{$item->id}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required> --}}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{$item->price}}
@@ -65,9 +92,21 @@
                     </tfoot>
                 </table>
             </div>
+
         </div>
         <div class="text-2xl basis-1/3">
-            <span class="mb-5 text-lg font-medium text-gray-600 dark:text-white">Datos de Entrada</span>
+            <div class="flex justify-between">
+                <div>
+                    <span class="mb-5 text-lg font-medium text-gray-600 dark:text-white">Datos de Entrada</span>
+                </div>
+                <div>
+                    <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+                        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                            GENERAR ENTRADA
+                        </span>
+                    </button>
+                </div>
+            </div>
             <div class="grid gap-6 mb-6 md:grid-cols-1">
                 <div>
                     <label for="proveedor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre Proveedor</label>
@@ -183,7 +222,61 @@
                 </div>
             </div>
         </div>
+
     </div>
     @include('livewire.storehouse.warehouse.form')
-    @include('livewire.storehouse.warehouse.formEditar')
 </div>
+<script>
+    function Confirm(id)
+    {
+        swal({
+            title: 'CONFIRMAR',
+            text: '¿CONFIRMAS ELIMINAR EL REGISTRO?',
+            type: 'warning',
+            showCancelButton: true,
+            cancelBtuttonText: 'Cerrar',
+            cancelButtonColor: '#fff',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#3B3f5C'
+        }).then( function (result){
+            if (result.value){
+                window.livewire.emit('deleteRow', id)
+                swal.close()
+            }
+        })
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const defaultModal = document.getElementById('defaultModal');
+        const erElements = document.querySelectorAll('.er');
+
+        function hideModal() {
+            defaultModal.style.display = 'none';
+        }
+
+        function showModal() {
+            defaultModal.style.display = 'block';
+        }
+
+        function onItemAdded(msg) {
+            hideModal();
+            // noty(msg);
+        }
+
+        function onItemUpdated(msg) {
+            hideModal();
+            // noty(msg); // Supongo que noty es una función definida en otro lugar de tu código
+        }
+
+        function onItemDeleted(msg) {
+            // noty(msg); // Supongo que noty es una función definida en otro lugar de tu código
+        }
+
+        window.livewire.on('item-added', onItemAdded);
+        window.livewire.on('item-updated', onItemUpdated);
+        window.livewire.on('item-deleted', onItemDeleted);
+        window.livewire.on('hide-modal', hideModal);
+        window.livewire.on('show-modal', showModal);
+    });
+
+</script>
