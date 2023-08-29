@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Storehouse\Warehouse;
 
 use App\Models\Inventory;
 use App\Models\Workarea;
-use Darryldecode\Cart\Cart as CartCart;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -13,11 +12,46 @@ class EntriesController extends Component
 {
     use WithPagination;
 
-    public $proveedor, $nomComer, $fecha, $fol_entrada, $factura, $nFactura, $ordenCompra, $depSolici, $nReq, $oSolicitante, $tCompraContrato, $nombrerecibe, $observciones;
+    public $proveedor, $nomComer, $fecha, $fol_entrada, $factura, $nFactura, $ordenCompra, $depSolici, $nReq, $oSolicitante, $tCompraContrato, $nombrerecibe, $observaciones;
 
     public $search, $article=[], $cantidad=[], $editId, $editName, $editCosto, $editQty;
 
     public $total, $itemsQuantity, $cart=[], $componentName, $selected_id, $pagination=10;
+
+    protected $rules = [
+        'proveedor' => 'required|min:4',
+        'nomComer' => 'required|min:4',
+        'fecha' => 'required',
+        'fol_entrada' => 'required',
+        'factura' => 'required',
+        'nFactura' => 'required',
+        'ordenCompra' => 'required',
+        'depSolici' => 'required',
+        'nReq' => 'required',
+        'oSolicitante' => 'required',
+        'tCompraContrato' => 'required',
+        'nombrerecibe' => 'required',
+        'observaciones' => 'required',
+        'cart' => 'required'
+    ];
+    protected $messages = [
+        'proveedor.required' => 'El proveedor es obligatorio capturarlo',
+        'proveedor.min' => 'El Nombre del Proveedor debe contener mas de 4 caracteres',
+        'nomComer.min' => 'El Nombre Comercial debe contener mas de 4 caracteres',
+        'nomComer.required' => 'El Campo es obligatorio',
+        'fecha.required' => 'El Campo es obligatorio',
+        'fol_entrada.required' => 'El Campo es obligatorio',
+        'factura.required' => 'El Campo es obligatorio',
+        'nFactura.required' => 'El Campo es obligatorio',
+        'ordenCompra.required' => 'El Campo es obligatorio',
+        'depSolici.required' => 'El Campo es obligatorio',
+        'nReq.required' => 'El Campo es obligatorio',
+        'oSolicitante.required' => 'El Campo es obligatorio',
+        'tCompraContrato.required' => 'El Campo es obligatorio',
+        'nombrerecibe.required' => 'El Campo es obligatorio',
+        'observaciones.required' => 'El Campo es obligatorio',
+        'cart.required' => 'Debe capturar articulos a la lista'
+    ];
 
     protected $listeners = [
         'removeItems' => 'removeItems',
@@ -107,5 +141,10 @@ class EntriesController extends Component
         $this->resetUI();
         session()->flash('message', "Articulo Modificado con exito");
         $this->emit('item-updated', 'Articulo modificado exitosamente!');
+    }
+
+    public function Store()
+    {
+        $this->validate($this->rules, $this->messages);
     }
 }

@@ -18,7 +18,9 @@
             <div>
                 <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                 <span class="sr-only">Open user menu</span>
-                <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+                <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-red-900 rounded-full dark:bg-purple-600">
+                    <span class="font-medium text-gray-50 dark:text-gray-s0">{{preg_replace('/\b(\w)[^\s]*\s*/m', '$1', auth()->user()->name)}}</span>
+                </div>
                 </button>
             </div>
             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">

@@ -46,8 +46,12 @@
                 </table>
             </div>
         <div>
-        {{$data->links()}}
     </form>
+    <div class="flex justify-between">
+        <div>
+            {{$data->links()}}
+        </div>
+    </div>
 @else
     <form class="space-y-1">
         <div class="grid grid-cols-1 gap-6 p-6 sm:grid-cols-1">
