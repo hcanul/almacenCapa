@@ -23,7 +23,7 @@ class InventoryController extends Component
         'numInv' => 'required|min:4',
         'descripcion' => 'required',
         'measurementunits_id' => 'required',
-        'existencia' => 'required',
+        // 'existencia' => 'required',
         'exisInicial' => 'required',
         'costo' => 'required'
     ];
@@ -33,7 +33,7 @@ class InventoryController extends Component
         'numInv.min' => 'El numero de inventario debe contener mas de 4 caracteres',
         'descripcion.required' => 'La descripción es obligatoria',
         'measurementunits_id.required' => 'Las unidades de medida son necesarias',
-        'existencia.required' => 'Debe capturar la existencia',
+        // 'existencia.required' => 'Debe capturar la existencia',
         'exisInicial.required' => 'Debe Capturar la Existencia Inicial',
         'costo.required' => 'La captura del costo es indispensable'
     ];
@@ -139,7 +139,7 @@ class InventoryController extends Component
             'descripcion' => $this->descripcion,
             'family_id' => $this->family_id,
             'measurementunits_id' => $this->measurementunits_id,
-            'existencia' => $this->existencia,
+            'existencia' => 0,
             'exisInicial' => $this->exisInicial,
             'costo' => $this->costo,
         ]);

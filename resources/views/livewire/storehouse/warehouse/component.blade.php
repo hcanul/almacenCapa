@@ -252,7 +252,7 @@
     {
         swal({
             title: 'CONFIRMAR',
-            text: '¿CONFIRMAS ELIMINAR EL REGISTRO?',
+            text: '¿CONFIRMAS ELIMINAR EL ARTICULO?',
             type: 'warning',
             showCancelButton: true,
             cancelBtuttonText: 'Cerrar',
@@ -261,7 +261,7 @@
             confirmButtonColor: '#3B3f5C'
         }).then( function (result){
             if (result.value){
-                window.livewire.emit('deleteRow', id)
+                window.livewire.emit('removeItems', id)
                 swal.close()
             }
         })

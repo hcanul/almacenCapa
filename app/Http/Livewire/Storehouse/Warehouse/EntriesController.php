@@ -3,10 +3,13 @@
 namespace App\Http\Livewire\Storehouse\Warehouse;
 
 use App\Models\Inventory;
+use App\Models\WarehouseEntry;
+use App\Models\WarehouseProduct;
 use App\Models\Workarea;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Livewire\Component;
 use Livewire\WithPagination;
+use PDF;
 
 class EntriesController extends Component
 {
@@ -70,6 +73,19 @@ class EntriesController extends Component
         $this->editName = null;
         $this->editCosto = null;
         $this->editQty = null;
+        $this->proveedor = null;
+        $this->nomComer = null;
+        $this->fecha = null;
+        $this->fol_entrada = null;
+        $this->factura = null;
+        $this->nFactura = null;
+        $this->ordenCompra = null;
+        $this->depSolici = null;
+        $this->nReq = null;
+        $this->oSolicitante = null;
+        $this->tCompraContrato = null;
+        $this->nombrerecibe = null;
+        $this->observaciones = null;
     }
 
     public function render()
@@ -95,6 +111,35 @@ class EntriesController extends Component
         )
                 ->extends('layouts.themes.app')
                 ->section('content');
+    }
+
+    public function Cancelar()
+    {
+        $this->search = '';
+        $this->total = Cart::getTotal();
+        $this->itemsQuantity = Cart::getTotalQuantity();
+        $this->componentName = 'BUSQUEDA ARTICULOS';
+        $this->selected_id = null;
+        $this->editId = null;
+        $this->editName = null;
+        $this->editCosto = null;
+        $this->editQty = null;
+        $this->proveedor = null;
+        $this->nomComer = null;
+        $this->fecha = null;
+        $this->fol_entrada = null;
+        $this->factura = null;
+        $this->nFactura = null;
+        $this->ordenCompra = null;
+        $this->depSolici = null;
+        $this->nReq = null;
+        $this->oSolicitante = null;
+        $this->tCompraContrato = null;
+        $this->nombrerecibe = null;
+        $this->observaciones = null;
+        $this->resetValidation();
+        $this->resetPage();
+        Cart::clear();
     }
 
     public function resetUI()
@@ -143,8 +188,51 @@ class EntriesController extends Component
         $this->emit('item-updated', 'Articulo modificado exitosamente!');
     }
 
+    public function removeItems($id)
+    {
+        $this->cart = Cart::remove($id);
+    }
+
     public function Store()
     {
         $this->validate($this->rules, $this->messages);
+
+        $entrada = WarehouseEntry::create([
+            'proveedor' => $this->proveedor,
+            'nomComer' => $this->nomComer,
+            'fecha' => $this->fecha,
+            'fol_entrada' => $this->fol_entrada,
+            'factura' => $this->factura,
+            'nFactura' => $this->nFactura,
+            'ordenCompra' => $this->ordenCompra,
+            'depSolici' => $this->depSolici,
+            'nReq' => $this->nReq,
+            'oSolicitante' => $this->oSolicitante,
+            'tCompraContrato' => $this->tCompraContrato,
+            'nombrerecibe' => $this->nombrerecibe,
+            'observaciones' => $this->observaciones,
+            'total' => $this->total
+        ]);
+
+        foreach ($this->cart as $value) {
+            $inventa = Inventory::find($value['id']);
+            WarehouseProduct::create([
+                'warehouse_entries_id' => $entrada->id,
+                'inventory_id' => $value['id'],
+                'numInv' => $inventa->numInv,
+                'cantidad' => $value['quantity'],
+                'measurementunits_id' => $inventa->measurementunits_id,
+                'descripcion' => $value['name'],
+                'pUnit' => $value['price'],
+                'total' => $value['quantity'] * $value['price'],
+                'ordenCompra' => $entrada->ordenCompra
+            ]);
+           $inventa->Update(['existencia'=> $inventa->existencia + $value['quantity']]);
+        }
+    }
+
+    public function topdf()
+    {
+        $pdf = PDF::loadView();
     }
 }
