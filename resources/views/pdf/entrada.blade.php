@@ -5,33 +5,21 @@
     <title>Entrada de Almacen FCP</title>
 </head>
 <body>
-    <div class="row">
-        <div class="col">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
             <img src="{{ asset('img/logoqroo.png')}}" class="rounded img-thumbnail float-start img-fluid" alt="logoqroo" width="70px">
         </div>
-        <div class="col">
+        <div class="text-center">
             <span>Comision de agua Potable y alcantarillado</span>
+            <span>del estado de Quintana roo</span>
+            <span>Departamento de recursos materiales</span>
+            <span>almacen organismo operador</span>
         </div>
-        <div class="col">
+        <div>
             <img src="{{ asset('img/logoqroo.png')}}" class="rounded img-thumbnail float-end img-fluid" alt="logoqroo" width="70px">
         </div>
     </div>
 
-    <table class="table table-striped">
-        <thead>
-          ...
-        </thead>
-        <tbody>
-          ...
-          <tr>
-            <td colspan="4">
-              <table class="table mb-0">
-                ...
-              </table>
-            </td>
-          </tr>
-          ...
-        </tbody>
-      </table>
+
 </body>
 </html>
