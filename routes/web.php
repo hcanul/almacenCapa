@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExportController;
 use App\Http\Livewire\Asignar\AsignarController;
 use App\Http\Livewire\Permisos\PermisosController;
 use App\Http\Livewire\Role\RoleController;
@@ -47,6 +48,7 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
             Route::get('Familias', FamilyController::class)->name('indexFamily');
             Route::get('Inventario', InventoryController::class)->name('indexInventory');
             Route::get('EntradaAlmacen', EntriesController::class)->name('indexEntrada');
+            Route::get('entrada/{id}',[ExportController::class, 'reportPDF']);
         });
     });
 });

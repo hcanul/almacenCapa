@@ -138,7 +138,7 @@
                 </div>
                 <div>
                     <label for="nomComer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre Comercial</label>
-                    <input type="text" name="nomComer" id="nomComer" wire:modele="nomComer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nombre Comercial">
+                    <input type="text" name="nomComer" id="nomComer" wire:model="nomComer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nombre Comercial">
                     @error('nomComer')
                         <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ $message }}</span></p>
                     @enderror
@@ -154,7 +154,7 @@
                 </div>
                 <div>
                     <label for="fol_entrada" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Folio</label>
-                    <input type="text" name="fol_entrada" id="fol_entrada" wire:model="fol_entrada" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="000001" disabled>
+                    <input type="text" name="fol_entrada" id="fol_entrada" wire:model="fol_entrada" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="000001" >
                     @error('fol_entrada')
                         <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ $message }}</span></p>
                     @enderror
@@ -174,14 +174,14 @@
                 </div>
                 <div>
                     <label for="nFactura" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Núm. Factura</label>
-                    <input type="text" name="nFactura" id="nFactura" wire:model="nFactura" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="000001" disabled>
+                    <input type="text" name="nFactura" id="nFactura" wire:model="nFactura" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="000001" >
                     @error('nFactura')
                         <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ $message }}</span></p>
                     @enderror
                 </div>
                 <div>
                     <label for="ordenCompra" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Orden de Compra</label>
-                    <input type="text" name="ordenCompra" id="ordenCompra" wire:model="ordenCompra" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="000001" disabled>
+                    <input type="text" name="ordenCompra" id="ordenCompra" wire:model="ordenCompra" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="000001">
                     @error('ordenCompra')
                         <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ $message }}</span></p>
                     @enderror

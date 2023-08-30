@@ -9,7 +9,6 @@ use App\Models\Workarea;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Livewire\Component;
 use Livewire\WithPagination;
-use PDF;
 
 class EntriesController extends Component
 {
@@ -40,8 +39,8 @@ class EntriesController extends Component
     protected $messages = [
         'proveedor.required' => 'El proveedor es obligatorio capturarlo',
         'proveedor.min' => 'El Nombre del Proveedor debe contener mas de 4 caracteres',
-        'nomComer.min' => 'El Nombre Comercial debe contener mas de 4 caracteres',
         'nomComer.required' => 'El Campo es obligatorio',
+        'nomComer.min' => 'El Nombre Comercial debe contener mas de 4 caracteres',
         'fecha.required' => 'El Campo es obligatorio',
         'fol_entrada.required' => 'El Campo es obligatorio',
         'factura.required' => 'El Campo es obligatorio',
@@ -137,6 +136,12 @@ class EntriesController extends Component
         $this->tCompraContrato = null;
         $this->nombrerecibe = null;
         $this->observaciones = null;
+        $this->article = [];
+        $this->cantidad = [];
+        $this->editId = null;
+        $this->editName = null;
+        $this->editCosto = null;
+        $this->editQty = null;
         $this->resetValidation();
         $this->resetPage();
         Cart::clear();
@@ -220,26 +225,23 @@ class EntriesController extends Component
         //         'warehouse_entries_id' => $entrada->id,
         //         'inventory_id' => $value['id'],
         //         'numInv' => $inventa->numInv,
-        //         'cantidad' => $value['quantity'],
+        //         'catidad' => $value['quantity'],
         //         'measurementunits_id' => $inventa->measurementunits_id,
         //         'descripcion' => $value['name'],
         //         'pUnit' => $value['price'],
         //         'total' => $value['quantity'] * $value['price'],
         //         'ordenCompra' => $entrada->ordenCompra
         //     ]);
-        //    $inventa->Update(['existencia'=> $inventa->existencia + $value['quantity']]);
+        //     $inventa->Update(['existencia'=> $inventa->existencia + $value['quantity']]);
         // }
 
-        $data = [
-            'nombre' => 'hugo',
-            'apellido' => 'paulino',
-        ];
-        $this->topdf($data);
+        // $this->resetUI();
+        // $this->Cancelar();
+        // session()->flash('message', "Entrada Generada Con exito");
+        // $this->emit('item-added', 'Entrada Generada Con exito!');
+        // return redirect("Almacen/entrada/$entrada->id", ['target' => '_blank']);
+        return redirect("Almacen/entrada/9", ['target' => '_blank']);
+
     }
 
-    public function topdf($data)
-    {
-
-        return Pdf::loadFile(public_path().'/entrada.html')->stream('download.pdf');
-    }
 }
