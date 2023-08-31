@@ -6,6 +6,7 @@ use App\Models\Inventory;
 use App\Models\WarehouseEntry;
 use App\Models\WarehouseProduct;
 use App\Models\Workarea;
+use App\Services\FolioService;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,7 +15,7 @@ class EntriesController extends Component
 {
     use WithPagination;
 
-    public $proveedor, $nomComer, $fecha, $fol_entrada, $factura, $nFactura, $ordenCompra, $depSolici, $nReq, $oSolicitante, $tCompraContrato, $nombrerecibe, $observaciones;
+    public $proveedor, $nomComer, $fecha, $fol_entrada, $factura, $nFactura, $ordenCompra, $workarea_id, $nReq, $oSolicitante, $tCompraContrato, $nombrerecibe, $observaciones;
 
     public $search, $article=[], $cantidad=[], $editId, $editName, $editCosto, $editQty;
 
@@ -28,7 +29,7 @@ class EntriesController extends Component
         'factura' => 'required',
         'nFactura' => 'required',
         'ordenCompra' => 'required',
-        'depSolici' => 'required',
+        'workarea_id' => 'required',
         'nReq' => 'required',
         'oSolicitante' => 'required',
         'tCompraContrato' => 'required',
@@ -46,7 +47,7 @@ class EntriesController extends Component
         'factura.required' => 'El Campo es obligatorio',
         'nFactura.required' => 'El Campo es obligatorio',
         'ordenCompra.required' => 'El Campo es obligatorio',
-        'depSolici.required' => 'El Campo es obligatorio',
+        'workarea_id.required' => 'El Campo es obligatorio',
         'nReq.required' => 'El Campo es obligatorio',
         'oSolicitante.required' => 'El Campo es obligatorio',
         'tCompraContrato.required' => 'El Campo es obligatorio',
@@ -75,11 +76,11 @@ class EntriesController extends Component
         $this->proveedor = null;
         $this->nomComer = null;
         $this->fecha = null;
-        $this->fol_entrada = null;
+        $this->fol_entrada = FolioService::generarFolio();
         $this->factura = null;
         $this->nFactura = null;
         $this->ordenCompra = null;
-        $this->depSolici = null;
+        $this->workarea_id = null;
         $this->nReq = null;
         $this->oSolicitante = null;
         $this->tCompraContrato = null;
@@ -130,7 +131,7 @@ class EntriesController extends Component
         $this->factura = null;
         $this->nFactura = null;
         $this->ordenCompra = null;
-        $this->depSolici = null;
+        $this->workarea_id = null;
         $this->nReq = null;
         $this->oSolicitante = null;
         $this->tCompraContrato = null;
@@ -200,47 +201,47 @@ class EntriesController extends Component
 
     public function Store()
     {
-        // $this->validate($this->rules, $this->messages);
+        $this->validate($this->rules, $this->messages);
 
-        // $entrada = WarehouseEntry::create([
-        //     'proveedor' => $this->proveedor,
-        //     'nomComer' => $this->nomComer,
-        //     'fecha' => $this->fecha,
-        //     'fol_entrada' => $this->fol_entrada,
-        //     'factura' => $this->factura,
-        //     'nFactura' => $this->nFactura,
-        //     'ordenCompra' => $this->ordenCompra,
-        //     'depSolici' => $this->depSolici,
-        //     'nReq' => $this->nReq,
-        //     'oSolicitante' => $this->oSolicitante,
-        //     'tCompraContrato' => $this->tCompraContrato,
-        //     'nombrerecibe' => $this->nombrerecibe,
-        //     'observaciones' => $this->observaciones,
-        //     'total' => $this->total
-        // ]);
+        $entrada = WarehouseEntry::create([
+            'proveedor' => $this->proveedor,
+            'nomComer' => $this->nomComer,
+            'fecha' => $this->fecha,
+            'fol_entrada' => $this->fol_entrada,
+            'factura' => $this->factura,
+            'nFactura' => $this->nFactura,
+            'ordenCompra' => $this->ordenCompra,
+            'workarea_id' => $this->workarea_id,
+            'nReq' => $this->nReq,
+            'oSolicitante' => $this->oSolicitante,
+            'tCompraContrato' => $this->tCompraContrato,
+            'nombrerecibe' => $this->nombrerecibe,
+            'observaciones' => $this->observaciones,
+            'total' => $this->total
+        ]);
 
-        // foreach ($this->cart as $value) {
-        //     $inventa = Inventory::find($value['id']);
-        //     WarehouseProduct::create([
-        //         'warehouse_entries_id' => $entrada->id,
-        //         'inventory_id' => $value['id'],
-        //         'numInv' => $inventa->numInv,
-        //         'catidad' => $value['quantity'],
-        //         'measurementunits_id' => $inventa->measurementunits_id,
-        //         'descripcion' => $value['name'],
-        //         'pUnit' => $value['price'],
-        //         'total' => $value['quantity'] * $value['price'],
-        //         'ordenCompra' => $entrada->ordenCompra
-        //     ]);
-        //     $inventa->Update(['existencia'=> $inventa->existencia + $value['quantity']]);
-        // }
+        foreach ($this->cart as $value) {
+            $inventa = Inventory::find($value['id']);
+            WarehouseProduct::create([
+                'warehouse_entries_id' => $entrada->id,
+                'inventory_id' => $value['id'],
+                'numInv' => $inventa->numInv,
+                'catidad' => $value['quantity'],
+                'measurementunits_id' => $inventa->measurementunits_id,
+                'descripcion' => $value['name'],
+                'pUnit' => $value['price'],
+                'total' => $value['quantity'] * $value['price'],
+                'ordenCompra' => $entrada->ordenCompra
+            ]);
+            $inventa->Update(['existencia'=> $inventa->existencia + $value['quantity']]);
+        }
 
-        // $this->resetUI();
-        // $this->Cancelar();
-        // session()->flash('message', "Entrada Generada Con exito");
-        // $this->emit('item-added', 'Entrada Generada Con exito!');
-        // return redirect("Almacen/entrada/$entrada->id", ['target' => '_blank']);
-        return redirect("Almacen/entrada/9", ['target' => '_blank']);
+        $this->resetUI();
+        $this->Cancelar();
+        session()->flash('message', "Entrada Generada Con exito");
+        $this->emit('item-added', 'Entrada Generada Con exito!');
+        return redirect("Almacen/entrada/$entrada->id", ['target' => '_blank']);
+        // return redirect("Almacen/entrada/1", ['target' => '_blank']);
 
     }
 

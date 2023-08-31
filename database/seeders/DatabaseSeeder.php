@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(JobsSeeder::class);
         $this->call(WorkareaSeeder::class);
         $this->call(MeasurementunitsSeeder::class);
+        $this->call(BossSeeder::class);
     }
 }

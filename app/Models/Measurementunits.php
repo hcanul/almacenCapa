@@ -17,4 +17,9 @@ class Measurementunits extends Model
     {
         return $this->hasMany(Inventory::class);
     }
+
+    public function warehouseproduct()
+    {
+        return $this->hasMany(WarehouseProduct::class);
+    }
 }

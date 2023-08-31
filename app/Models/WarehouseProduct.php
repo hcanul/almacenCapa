@@ -12,4 +12,9 @@ class WarehouseProduct extends Model
     use SoftDeletes;
 
     protected $fillable = [ 'warehouse_entries_id', 'inventory_id', 'numInv', 'catidad', 'measurementunits_id', 'descripcion', 'pUnit', 'total', 'ordenCompra' ];
+
+    public function measurementunits()
+    {
+        return $this->belongsTo(Measurementunits::class);
+    }
 }

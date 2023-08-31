@@ -13,10 +13,11 @@ class JobsSeeder extends Seeder
      */
     public function run(): void
     {
-        Job::create(['name'=>'Gerente']);
-        Job::create(['name'=>'Subgerente']);
-        Job::create(['name'=>'Jefe de Departamento']);
-        Job::create(['name'=>'Jefe de Area I']);
-        Job::create(['name'=>'Jefe de Area II']);
+        Job::create(['name'=>'GERENTE']);
+        Job::create(['name'=>'SUBGERENTE']);
+        Job::create(['name'=>'JEFE DE DEPARTAMENTO']);
+        Job::create(['name'=>'JEFE DE AREA I']);
+        Job::create(['name'=>'JEFE DE AREA II']);
+        Job::create(['name'=>'ENCARGADO']);
     }
 }

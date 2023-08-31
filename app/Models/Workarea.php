@@ -17,4 +17,9 @@ class Workarea extends Model
     {
         return $this->hasMany(Boss::class);
     }
+
+    public function warehouseentry()
+    {
+        return $this->hasMany(WarehouseEntry::class);
+    }
 }

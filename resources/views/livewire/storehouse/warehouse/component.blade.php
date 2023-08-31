@@ -154,7 +154,7 @@
                 </div>
                 <div>
                     <label for="fol_entrada" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Folio</label>
-                    <input type="text" name="fol_entrada" id="fol_entrada" wire:model="fol_entrada" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="000001" >
+                    <input type="text" name="fol_entrada" id="fol_entrada" wire:model="fol_entrada" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled >
                     @error('fol_entrada')
                         <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ $message }}</span></p>
                     @enderror
@@ -187,14 +187,14 @@
                     @enderror
                 </div>
                 <div>
-                    <label for="depSolici" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Departamento</label>
-                    <select id="depSolici" id="depSolici" wire:model="depSolici" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Fecha">
+                    <label for="workarea_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Departamento</label>
+                    <select id="workarea_id" id="workarea_id" wire:model="workarea_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Fecha">
                         <option value="Elegir">Elija una opción</option>
                         @foreach ($deptos as $depto )
                             <option value="{{$depto->id}}">{{$depto->name}}</option>
                         @endforeach
                     </select>
-                    @error('depSolici')
+                    @error('workarea_id')
                         <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ $message }}</span></p>
                     @enderror
                 </div>

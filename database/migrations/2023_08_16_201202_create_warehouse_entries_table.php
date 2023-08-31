@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('factura',['Factura', 'Nota', 'Sal. Almacen Gral.']);
             $table->string('nFactura', 15);
             $table->string('ordenCompra', 15);
-            $table->string('depSolici', 150);
+            $table->string('workarea_id', 150);
             $table->string('nReq', 15);
             $table->string('oSolicitante', 100);
             $table->enum('tCompraContrato', ["Solicitud", "Asignacion", "SalidaAlmacen", "Compra"]);

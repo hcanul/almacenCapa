@@ -13,17 +13,18 @@ class WorkareaSeeder extends Seeder
      */
     public function run(): void
     {
-        Workarea::create(['name'=> 'Organismo Operador']);
-        Workarea::create(['name'=> 'Administrativa']);
-        Workarea::create(['name'=> 'Comercial']);
-        Workarea::create(['name'=> 'Técnica']);
-        Workarea::create(['name'=> 'Informática']);
-        Workarea::create(['name'=> 'Recursos Materiales']);
-        Workarea::create(['name'=> 'Recursos Humanos']);
-        Workarea::create(['name'=> 'Recursos Financieros']);
-        Workarea::create(['name'=> 'Operación']);
-        Workarea::create(['name'=> 'Recuperación de Perdidas']);
-        Workarea::create(['name'=> 'Atención Usuarios']);
-        Workarea::create(['name'=> 'Padron']);
+        Workarea::create(['name'=> 'ORGANISMO OPERADOR']);
+        Workarea::create(['name'=> 'ADMINISTRATIVO']);
+        Workarea::create(['name'=> 'COMERCIAL']);
+        Workarea::create(['name'=> 'TÉCNICO']);
+        Workarea::create(['name'=> 'INFORMÁTICA']);
+        Workarea::create(['name'=> 'RECURSOS MATERIALES']);
+        Workarea::create(['name'=> 'RECURSOS HUMANOS']);
+        Workarea::create(['name'=> 'RECURSOS FINANCIEROS']);
+        Workarea::create(['name'=> 'OPERACIÓN']);
+        Workarea::create(['name'=> 'RECUPEERACIOÓN DE PERDIDAS']);
+        Workarea::create(['name'=> 'ATENCIÓN USUARIOS']);
+        Workarea::create(['name'=> 'PADRON']);
+        Workarea::create(['name'=> 'ALMACÉN']);
     }
 }
