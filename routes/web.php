@@ -9,6 +9,7 @@ use App\Http\Livewire\Storehouse\Family\FamilyController;
 use App\Http\Livewire\Storehouse\Inventory\InventoryController;
 use App\Http\Livewire\Storehouse\Measurementunits\MeaserementunitControlle;
 use App\Http\Livewire\Storehouse\Warehouse\EntriesController;
+use App\Http\Livewire\Storehouse\Warehouse\ReprinterController;
 use App\Http\Livewire\User\UserController;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
@@ -47,7 +48,8 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
             Route::get('Unidades', MeaserementunitControlle::class)->name('indexUnits');
             Route::get('Familias', FamilyController::class)->name('indexFamily');
             Route::get('Inventario', InventoryController::class)->name('indexInventory');
-            Route::get('EntradaAlmacen', EntriesController::class)->name('indexEntrada');
+            Route::get('EntradaAlmacen/Captura', EntriesController::class)->name('indexEntrada');
+            Route::get('EntradaAlmacen/Reimpresion', ReprinterController::class)->name('indexReEntrada');
             Route::get('entrada/{id}',[ExportController::class, 'reportPDF']);
         });
     });

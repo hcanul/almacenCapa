@@ -10,7 +10,7 @@
             font-family: 'Montserrat', sans-serif;
         }
         .headir {
-            background-color: #cbc8c8cd;
+            background-color: #272626e8;
             color: white;
             padding: 5px;
             text-align: center;

@@ -29,9 +29,15 @@
             </button>
             <ul id="dropdown-entradas" class="hidden py-2 space-y-2">
                 <li>
-                    <a href="{{ route('indexEntrada') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                    <a href="{{ route('indexEntrada') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-16 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                         @include('layouts.themes.icons.adddoc')
                         <span class="flex-1 ml-3 whitespace-nowrap">Captura</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('indexReEntrada') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-16 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                        @include('layouts.themes.icons.printer')
+                        <span class="flex-1 ml-3 whitespace-nowrap">Reimpresión</span>
                     </a>
                 </li>
             </ul>
