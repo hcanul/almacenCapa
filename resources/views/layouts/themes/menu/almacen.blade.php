@@ -29,13 +29,13 @@
             </button>
             <ul id="dropdown-entradas" class="hidden py-2 space-y-2">
                 <li>
-                    <a href="{{ route('indexEntrada') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-16 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                    <a href="{{ route('indexEntrada') }}" class="flex items-center w-full p-2 pl-16 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                         @include('layouts.themes.icons.adddoc')
                         <span class="flex-1 ml-3 whitespace-nowrap">Captura</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('indexReEntrada') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-16 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                    <a href="{{ route('indexReEntrada') }}" class="flex items-center w-full p-2 pl-16 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                         @include('layouts.themes.icons.printer')
                         <span class="flex-1 ml-3 whitespace-nowrap">Reimpresión</span>
                     </a>
@@ -47,6 +47,29 @@
                 @include('layouts.themes.icons.inventory')
                 <span class="flex-1 ml-3 whitespace-nowrap">Inventario</span>
             </a>
+        </li>
+        <li>
+            <button type="button" aria-controls="dropdown-salidas" data-collapse-toggle="dropdown-salidas" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                @include('layouts.themes.icons.warehouse')
+                <span class="flex-1 ml-3 text-left whitespace-nowrap">Salidas</span>
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                </svg>
+            </button>
+            <ul id="dropdown-salidas" class="hidden py-2 space-y-2">
+                <li>
+                    <a href="{{ route('indexEntrada') }}" class="flex items-center w-full p-2 pl-16 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                        @include('layouts.themes.icons.outwarehouse')
+                        <span class="flex-1 ml-3 whitespace-nowrap">Captura</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('indexReEntrada') }}" class="flex items-center w-full p-2 pl-16 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                        @include('layouts.themes.icons.printer')
+                        <span class="flex-1 ml-3 whitespace-nowrap">Reimpresión</span>
+                    </a>
+                </li>
+            </ul>
         </li>
     </ul>
 </li>
