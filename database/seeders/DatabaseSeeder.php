@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(WorkareaSeeder::class);
         $this->call(MeasurementunitsSeeder::class);
         $this->call(BossSeeder::class);
+        $this->call(DepartamentBossSeeder::class);
     }
 }

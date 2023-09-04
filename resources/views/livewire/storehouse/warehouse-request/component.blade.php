@@ -1,6 +1,6 @@
 <div>
     <div class="flex flex-row">
-        <div class="w-full mr-5 text-2xl">
+        <div class="w-full mr-5 text-2xl basis-5/6">
             <div class="flex justify-between">
                 <div>
                     <span class="mb-5 text-lg font-medium text-gray-600 mr-52 dark:text-white">LISTA DE MATERIALES</span>
@@ -119,5 +119,17 @@
                 </table>
             </div>
         </div>
+        <div class="text-2xl basis-1/6">
+
+                <div>
+                    <label for="observaciones" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" style="overflow:auto;resize:none">Observaciones</label>
+                    <textarea rows="4" name="observaciones" id="observaciones" wire:model="observaciones" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                    @error('observaciones')
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ $message }}</span></p>
+                    @enderror
+                </div>
+
+        </div>
     </div>
+
 </div>

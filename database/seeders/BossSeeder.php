@@ -33,50 +33,5 @@ class BossSeeder extends Seeder
             'job_id' => 2,
             'workarea_id' => 4,
         ]);
-        Boss::create([
-            'name' => 'C. HUGO PAULINO CANUL ECHAZARRETA',
-            'job_id' => 3,
-            'workarea_id' => 5,
-        ]);
-        Boss::create([
-            'name' => 'C. MERLE IRAMA NOVELO VELA',
-            'job_id' => 3,
-            'workarea_id' => 6,
-        ]);
-        Boss::create([
-            'name' => 'TSUI. RITA YANET MARTIN VAZQUEZ',
-            'job_id' => 3,
-            'workarea_id' => 7,
-        ]);
-        Boss::create([
-            'name' => 'C. ROSA MARIA POOT PUC',
-            'job_id' => 3,
-            'workarea_id' => 8,
-        ]);
-        Boss::create([
-            'name' => 'C. MAYRA ARELI NOVELO VELA',
-            'job_id' => 3,
-            'workarea_id' => 9,
-        ]);
-        Boss::create([
-            'name' => 'ING. IDELFONSO CAHUICH JIMENEZ',
-            'job_id' => 3,
-            'workarea_id' => 10,
-        ]);
-        Boss::create([
-            'name' => 'LIC. JOSE ANGELLO CIMA AKE',
-            'job_id' => 3,
-            'workarea_id' => 11,
-        ]);
-        Boss::create([
-            'name' => 'LIC. LORENA FRANCISCA LOPEZ LANDEROS',
-            'job_id' => 3,
-            'workarea_id' => 12,
-        ]);
-        Boss::create([
-            'name' => 'C. MAURA DEL CARMEN ARCEO SANCHEZ',
-            'job_id' => 6,
-            'workarea_id' => 13,
-        ]);
     }
 }

@@ -2,6 +2,10 @@
 
 namespace App\Http\Livewire\Storehouse\WarehouseRequest;
 
+use App\Models\Boss;
+use App\Models\Demands;
+use App\Models\DepartamentBoss;
+use App\Models\Detsol;
 use App\Models\Inventory;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,14 +18,16 @@ class DeparturesController extends Component
 
     public $search, $article=[], $cantidad=[], $editId, $editName, $editCosto, $editQty;
 
-    public $total, $itemsQuantity, $cart=[], $componentName, $selected_id, $pagination=10;
+    public $total, $itemsQuantity, $cart=[], $componentName, $selected_id, $pagination=10, $observaciones;
 
     protected $rules = [
-        'cart' => 'required'
+        'cart' => 'required',
+        'observaciones' => 'required'
     ];
 
     protected $messages = [
-        'cart.required' => 'Debe capturar articulos a la lista'
+        'cart.required' => 'Debe capturar articulos a la lista',
+        'observaciones.required' => 'Debe Capturar las observaciones'
     ];
 
     protected $listeners = [
@@ -79,6 +85,29 @@ class DeparturesController extends Component
         $this->editQty = null;
         $this->resetValidation();
         $this->resetPage();
+    }
+
+    public function Store()
+    {
+        $this->validate($this->rules, $this->messages);
+
+        $requerimiento = Demands::create([
+            'user_id' => Auth()->user()->id,
+            'total' => Cart::session(auth()->user()->id)->getTotal(),
+            'pfstatus' => 'Pendiente',
+            'sfstatus' => 'Pendiente',
+            'status' => 'Pendiente',
+            'obserMAt' => '',
+            'obserSub' => '',
+            'actividad' => $this->observaciones,
+            'boss_id' => DepartamentBoss::where('name', 'like', '%'. Auth()->user()->name . '%')->get()[0]->boss_id,
+        ]);
+
+        $this->cart = Cart::session(auth()->user()->id)->getContent()->sortBy('name');
+
+        foreach ($this->cart as $key => $value) {
+            Detsol::create([]);
+        }
     }
 
     public function imprimir()
