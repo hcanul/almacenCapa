@@ -58,7 +58,7 @@
             </button>
             <ul id="dropdown-salidas" class="hidden py-2 space-y-2">
                 <li>
-                    <a href="{{ route('indexEntrada') }}" class="flex items-center w-full p-2 pl-16 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                    <a href="{{ route('indexSolicitud') }}" class="flex items-center w-full p-2 pl-16 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                         @include('layouts.themes.icons.outwarehouse')
                         <span class="flex-1 ml-3 whitespace-nowrap">Captura</span>
                     </a>
