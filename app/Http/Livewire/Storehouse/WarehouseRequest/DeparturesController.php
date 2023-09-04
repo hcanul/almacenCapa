@@ -80,4 +80,10 @@ class DeparturesController extends Component
         $this->resetValidation();
         $this->resetPage();
     }
+
+    public function imprimir()
+    {
+        $pdf = Requisicion();
+        return redirect()->route('indexSolicitud', compact('pdf'))->render()->with('success', 'Requerimiento generado con exito');
+    }
 }
