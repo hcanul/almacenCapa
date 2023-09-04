@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\ExportPdfController;
 use App\Http\Livewire\Asignar\AsignarController;
 use App\Http\Livewire\Permisos\PermisosController;
 use App\Http\Livewire\Role\RoleController;
@@ -57,6 +58,6 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
 
     Route::middleware(['role_or_permission:SuperUser|Almcenista|Usuarios'])->group(function () {
         Route::get('Almacen/Solicitud', DeparturesController::class)->name('indexSolicitud');
-        Route::get('requerimiento/{id}',[ExportController::class, 'Requisicion']);
+        Route::get('requerimiento/{id}',[ExportPdfController::class, 'Requisicion']);
     });
 });
