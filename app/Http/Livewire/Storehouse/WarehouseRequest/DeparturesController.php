@@ -83,7 +83,6 @@ class DeparturesController extends Component
 
     public function imprimir()
     {
-        $pdf = Requisicion();
-        return redirect()->route('indexSolicitud', compact('pdf'))->render()->with('success', 'Requerimiento generado con exito');
+        return redirect("requerimiento/1", ['target' => '_blank']);
     }
 }

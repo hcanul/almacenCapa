@@ -8,6 +8,9 @@ use App\Models\WarehouseProduct;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
+
+
+
 class ExportController extends Controller
 {
     public function reportPDF($id)

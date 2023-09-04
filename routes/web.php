@@ -57,5 +57,6 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
 
     Route::middleware(['role_or_permission:SuperUser|Almcenista|Usuarios'])->group(function () {
         Route::get('Almacen/Solicitud', DeparturesController::class)->name('indexSolicitud');
+        Route::get('requerimiento/{id}',[ExportController::class, 'Requisicion']);
     });
 });
