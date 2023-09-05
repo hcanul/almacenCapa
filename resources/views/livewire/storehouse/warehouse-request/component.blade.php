@@ -11,7 +11,7 @@
                             AGREGAR ARTICULO
                         </span>
                     </button>
-                    <button wire:click.prevent="imprimir" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+                    <button wire:click.prevent="Store" class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
                         <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                             GENERAR SOLICITUD
                         </span>
@@ -120,7 +120,6 @@
             </div>
         </div>
         <div class="text-2xl basis-1/6">
-
                 <div>
                     <label for="observaciones" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" style="overflow:auto;resize:none">Observaciones</label>
                     <textarea rows="4" name="observaciones" id="observaciones" wire:model="observaciones" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
@@ -128,8 +127,61 @@
                         <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ $message }}</span></p>
                     @enderror
                 </div>
-
         </div>
     </div>
-
+    @include('livewire.storehouse.warehouse-request.form')
 </div>
+<script>
+    function Confirm(id)
+    {
+        swal({
+            title: 'CONFIRMAR',
+            text: '¿CONFIRMAS ELIMINAR EL ARTICULO?',
+            type: 'warning',
+            showCancelButton: true,
+            cancelBtuttonText: 'Cerrar',
+            cancelButtonColor: '#fff',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#3B3f5C'
+        }).then( function (result){
+            if (result.value){
+                window.livewire.emit('removeItems', id)
+                swal.close()
+            }
+        })
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const defaultModal = document.getElementById('defaultModal');
+        const erElements = document.querySelectorAll('.er');
+
+        function hideModal() {
+            defaultModal.style.display = 'none';
+        }
+
+        function showModal() {
+            defaultModal.style.display = 'block';
+        }
+
+        function onItemAdded(msg) {
+            hideModal();
+            // noty(msg);
+        }
+
+        function onItemUpdated(msg) {
+            hideModal();
+            // noty(msg); // Supongo que noty es una función definida en otro lugar de tu código
+        }
+
+        function onItemDeleted(msg) {
+            // noty(msg); // Supongo que noty es una función definida en otro lugar de tu código
+        }
+
+        window.livewire.on('item-added', onItemAdded);
+        window.livewire.on('item-updated', onItemUpdated);
+        window.livewire.on('item-deleted', onItemDeleted);
+        window.livewire.on('hide-modal', hideModal);
+        window.livewire.on('show-modal', showModal);
+    });
+
+</script>

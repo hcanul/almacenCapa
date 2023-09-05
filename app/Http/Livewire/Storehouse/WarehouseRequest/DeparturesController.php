@@ -18,7 +18,7 @@ class DeparturesController extends Component
 
     public $search, $article=[], $cantidad=[], $editId, $editName, $editCosto, $editQty;
 
-    public $total, $itemsQuantity, $cart=[], $componentName, $selected_id, $pagination=10, $observaciones;
+    public $total, $itemsQuantity, $cart=[], $componentName, $selected_id, $pagination=5, $observaciones;
 
     protected $rules = [
         'cart' => 'required',
@@ -87,31 +87,80 @@ class DeparturesController extends Component
         $this->resetPage();
     }
 
-    public function Store()
+    public function Seek()
     {
-        $this->validate($this->rules, $this->messages);
-
-        $requerimiento = Demands::create([
-            'user_id' => Auth()->user()->id,
-            'total' => Cart::session(auth()->user()->id)->getTotal(),
-            'pfstatus' => 'Pendiente',
-            'sfstatus' => 'Pendiente',
-            'status' => 'Pendiente',
-            'obserMAt' => '',
-            'obserSub' => '',
-            'actividad' => $this->observaciones,
-            'boss_id' => DepartamentBoss::where('name', 'like', '%'. Auth()->user()->name . '%')->get()[0]->boss_id,
-        ]);
-
-        $this->cart = Cart::session(auth()->user()->id)->getContent()->sortBy('name');
-
-        foreach ($this->cart as $key => $value) {
-            Detsol::create([]);
+        foreach ($this->article as $key => $value) {
+            $one = Inventory::find($value);
+            Cart::session(auth()->user()->id)->add($one->id, $one->descripcion, $one->costo, 1);
         }
+
+        $this->total = Cart::session(auth()->user()->id)->getTotal();
+        $this->itemsQuantity = Cart::session(auth()->user()->id)->getTotalQuantity();
+        $this->cart = Cart::session(auth()->user()->id)->getContent()->sortBy('name');
     }
 
-    public function imprimir()
+    public function Editar($id)
     {
-        return redirect("requerimiento/1", ['target' => '_blank']);
+        $this->componentName = 'EDITAR ARTICULOS';
+        $this->selected_id = $id;
+        $data = Cart::session(auth()->user()->id)->get($id);
+        $this->editId = $data->id;
+        $this->editName = $data->name;
+        $this->editCosto = $data->price;
+        $this->editQty = $data->quantity;
+    }
+
+    public function Update()
+    {
+        Cart::session(auth()->user()->id)->update($this->selected_id, array('quantity' => $this->editQty));
+        $this->resetUI();
+        session()->flash('message', "Articulo Modificado con exito");
+        $this->emit('item-updated', 'Articulo modificado exitosamente!');
+    }
+
+    public function removeItems($id)
+    {
+        $this->cart = Cart::session(auth()->user()->id)->remove($id);
+        $this->total = Cart::session(auth()->user()->id)->getTotal();
+        $this->itemsQuantity = Cart::session(auth()->user()->id)->getTotalQuantity();
+    }
+
+    public function Store()
+    {
+        // $this->validate($this->rules, $this->messages);
+        // $this->cart = Cart::session(auth()->user()->id)->getContent()->sortBy('name');
+
+        // $requerimiento = Demands::create([
+        //     'user_id' => Auth()->user()->id,
+        //     'total' => Cart::session(auth()->user()->id)->getTotal(),
+        //     'pfstatus' => 'Pendiente',
+        //     'sfstatus' => 'Pendiente',
+        //     'status' => 'Pendiente',
+        //     'obserMat' => '',
+        //     'obserSub' => '',
+        //     'actividad' => $this->observaciones,
+        //     'boss_id' => DepartamentBoss::where('name', 'like', '%'. Auth()->user()->name . '%')->get()[0]->boss_id,
+        // ]);
+
+        // $this->cart = Cart::session(auth()->user()->id)->getContent()->sortBy('name');
+
+        // foreach ($this->cart as $key => $value) {
+        //     $inventario = Inventory::find($value->id);
+        //     Detsol::create([
+        //         'demand_id' => $requerimiento->id,
+        //         'inventory_id' => $inventario->id,
+        //         'cantidad' => $value->quantity,
+        //         'costo' => $value->price,
+        //         'total' => $value->quantity * $value->price,
+        //     ]);
+        // }
+
+        // $this->imprimir($requerimiento->id);
+        $this->imprimir(2);
+    }
+
+    public function imprimir($id)
+    {
+        return redirect("requerimiento/$id", ['target' => '_blank']);
     }
 }

@@ -11,5 +11,5 @@ class Detsol extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = [ 'solicitud_id', 'inventarios_id', 'cantidad', 'costo', 'total' ];
+    protected $fillable = [ 'demand_id', 'inventory_id', 'cantidad', 'costo', 'total' ];
 }

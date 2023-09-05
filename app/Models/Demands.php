@@ -11,5 +11,5 @@ class Demands extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = [ 'userId', 'total', 'pfstatus', 'sfstatus', 'status', 'obserMat', 'obserSub', 'actividad', 'boss_id' ];
+    protected $fillable = [ 'user_id', 'total', 'pfstatus', 'sfstatus', 'status', 'obserMat', 'obserSub', 'actividad', 'boss_id' ];
 }
