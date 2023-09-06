@@ -18,5 +18,8 @@
             @include('layouts.themes.menu.almacen')
         </ul>
         @endrole
+        <ul>
+            @include('layouts.themes.menu.authorize')
+        </ul>
     </div>
 </aside>

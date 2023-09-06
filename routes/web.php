@@ -5,6 +5,7 @@ use App\Http\Controllers\ExportPdfController;
 use App\Http\Livewire\Asignar\AsignarController;
 use App\Http\Livewire\Permisos\PermisosController;
 use App\Http\Livewire\Role\RoleController;
+use App\Http\Livewire\StoreHouse\Auth\AuthorizeController;
 use App\Http\Livewire\Storehouse\Boss\BossController;
 use App\Http\Livewire\Storehouse\Family\FamilyController;
 use App\Http\Livewire\Storehouse\Inventory\InventoryController;
@@ -59,5 +60,11 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
     Route::middleware(['role_or_permission:SuperUser|Almcenista|Usuarios'])->group(function () {
         Route::get('Almacen/Solicitud', DeparturesController::class)->name('indexSolicitud');
         Route::get('requerimiento/{id}',[ExportPdfController::class, 'Requisicion']);
+    });
+
+    Route::middleware(['role_or_permission:SuperUser|JefeMteriales'])->group( function () {
+        Route::group(['prefix' => 'Administración'], function(){
+            Route::get('Autorize/Materiales', AuthorizeController::class)->name('indexAutorize');
+        });
     });
 });
