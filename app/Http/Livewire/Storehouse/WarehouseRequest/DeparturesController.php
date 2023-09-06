@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Storehouse\WarehouseRequest;
 
-use App\Models\Boss;
 use App\Models\Demands;
 use App\Models\DepartamentBoss;
 use App\Models\Detsol;
@@ -10,7 +9,6 @@ use App\Models\Inventory;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
-use Illuminate\Support\Facades\Auth;
 
 class DeparturesController extends Component
 {
@@ -156,7 +154,6 @@ class DeparturesController extends Component
         }
 
         $this->imprimir($requerimiento->id);
-        // $this->imprimir(2);
     }
 
     public function imprimir($id)

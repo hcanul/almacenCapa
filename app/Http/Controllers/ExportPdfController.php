@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Boss;
 use App\Models\Demands;
 use App\Models\DepartamentBoss;
 use App\Models\Detsol;
 use App\Models\Inventory;
+use App\Models\Job;
 use App\Models\Measurementunits;
 use App\Models\User;
 use App\Models\Workarea;
@@ -142,6 +144,63 @@ class PDF extends Fpdf
 
     function footer()
     {
+        $this->SetY(-30);
+        $this->SetFont('Arial', 'B', 12);
+        $this->Cell(150, 6, 'TOTAL $', 0, 0, 'R', false);
+        $this->Cell(30, 6, number_format($this->total, 2), 1, 1, 'C', true);
+        $this->Ln();
+        $col_width = $this->GetPageWidth() / 9;
+
+        $AreaMat = DepartamentBoss::whereJobId(3)->whereWorkareaId(6)->get()[0];
+        $MatName = $AreaMat->name;
+        $tituloMat = Job::find(3)->name;
+        $areaMat = Workarea::find(6)->name;
+
+        $subArea = Boss::find(2);
+        $subName = $subArea->name;
+        $subTitulo = Job::find(2)->name;
+        $subGerencia = Workarea::find(2)->name;
+
+        $buscar = Boss::where('name', 'like', '%' . $this->solicitante . '%')->get();
+        $bandera = count($buscar) > 0 ? 1:0;
+        $solicitante = count($buscar) == 0 ? DepartamentBoss::where('name', 'like', '%'. $this->solicitante . '%')->get()[0]: $buscar;
+        $tituloSol = Job::find($solicitante->job_id)->name;
+        $areaSol = Workarea::find($solicitante->workarea_id)->name;
+
+        $jefe = $bandera == 0 ? Boss::find($solicitante->boss_id): Boss::find(1);
+        $jefeName = $jefe->name;
+        $jefeTitulo = Job::find($jefe->job_id)->name;
+        $jefeArea =  Workarea::find($jefe->workarea_id)->name;
+
+        $this->SetFont('Arial', 'B', 6);
+        $this->Cell($col_width + strlen($solicitante->name)- 10, 4, utf8_decode($solicitante->name), 'B', 0, 'C', false);
+        $this->Cell($col_width/3, 4, '', 0, 0, 'C', false);
+        $this->Cell($col_width + strlen($MatName) - 10, 4, utf8_decode($MatName), 'B', 0, 'C', false);
+        $this->Cell($col_width /3, 4, '', 0, 0, 'C', false);
+        $this->Cell($col_width + strlen($subName) - 10, 4, utf8_decode($subName), 'B', 0, 'C', false);
+        $this->Cell($col_width / 3, 4, '', 0, 0, 'C', false);
+        $this->Cell($col_width + strlen($jefeName) - 10, 4, utf8_decode($jefeName), 'B', 0, 'C', false);
+        $this->Ln(4);
+
+        $this->Cell($col_width / 2, 4, '', 0, 0, 'C', false);
+        $this->Cell($col_width, 4, utf8_decode($tituloSol), 0, 0, 'C', false);
+        $this->Cell($col_width, 4, '', 0, 0, 'C', false);
+        $this->Cell($col_width, 4, utf8_decode($tituloMat), 0, 0, 'C', false);
+        $this->Cell($col_width, 4, '', 0, 0, 'C', false);
+        $this->Cell($col_width, 4, utf8_decode($subTitulo), 0, 0, 'C', false);
+        $this->Cell($col_width, 4, '', 0, 0, 'C', false);
+        $this->Cell($col_width, 4, utf8_decode($jefeTitulo), 0, 0, 'C', false);
+        $this->Ln(3);
+
+        $this->Cell($col_width / 2, 4, '', 0, 0, 'C', false);
+        $this->Cell($col_width, 4, utf8_decode($areaSol), 0, 0, 'C', false);
+        $this->Cell($col_width, 4, '', 0, 0, 'C', false);
+        $this->Cell($col_width, 4, utf8_decode($areaMat), 0, 0, 'C', false);
+        $this->Cell($col_width, 4, '', 0, 0, 'C', false);
+        $this->Cell($col_width, 4, utf8_decode($subGerencia), 0, 0, 'C', false);
+        $this->Cell($col_width, 4, '', 0, 0, 'C', false);
+        $this->Cell($col_width, 4, utf8_decode($jefeArea), 0, 0, 'C', false);
+
 
     }
 
@@ -216,9 +275,9 @@ class PDF extends Fpdf
             $this->Cell($col_width * 2, 7, Str::limit(utf8_decode($inven->descripcion), 34, '...'), 1, 0, 'C', $fill);
             $this->SetFont('Arial','B', 8);
             $this->Cell($col_width, 7, $unidad, 1, 0, 'C', $fill);
-            $this->Cell($col_width, 7, $value->cantidad, 1, 0, 'C', $fill);
-            $this->Cell($col_width, 7, $value->costo, 1, 0, 'C', $fill);
-            $this->Cell($col_width, 7, $value->total, 1, 0, 'C', $fill);
+            $this->Cell($col_width, 7, number_format($value->cantidad, 2), 1, 0, 'C', $fill);
+            $this->Cell($col_width, 7, number_format($value->costo, 2), 1, 0, 'C', $fill);
+            $this->Cell($col_width, 7, number_format($value->total, 2), 1, 0, 'C', $fill);
             $this->Ln();
             $fill = !$fill;
         }
