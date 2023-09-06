@@ -12,6 +12,7 @@ use App\Models\Workarea;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Codedge\Fpdf\Fpdf\Fpdf;
+use Illuminate\Support\Str;
 
 class ExportPdfController extends Controller
 {
@@ -105,7 +106,7 @@ class PDF extends Fpdf
         $this->Cell($col_width, 4, 'SOLICITANTE:', 0, 0, 'L', false);
         $this->Cell($col_width / 8, 4, ' ', 0, 0, 'C', false);
         $this->SetFont('Arial', '', 8);
-        $this->Cell($col_width * 2 +10, 4, $this->solicitante, 'B', 0, 'C', false);
+        $this->Cell($col_width * 2 +10, 4, utf8_decode($this->solicitante), 'B', 0, 'C', false);
         $this->Cell($col_width / 4, 4, '', 0, 0, 'C', false);
         $this->SetFont('Arial', 'B', 8);
         $this->Cell($col_width - 10, 4, 'FECHA:', 0, 0, 'L', false);
@@ -118,7 +119,7 @@ class PDF extends Fpdf
         $this->Cell($col_width, 4, 'DEPARTAMENTO:', 0, 0, 'L', false);
         $this->Cell($col_width / 8, 4, ' ', 0, 0, 'C', false);
         $this->SetFont('Arial', '', 8);
-        $this->Cell($col_width * 2 +10, 4, $this->departamento, 'B', 0, 'C', false);
+        $this->Cell($col_width * 2 +10, 4, utf8_decode($this->departamento), 'B', 0, 'C', false);
         $this->Cell($col_width / 4, 4, '', 0, 0, 'C', false);
         $this->SetFont('Arial', 'B', 8);
         $this->Cell($col_width - 10, 4, 'FOLIO:', 0, 0, 'L', false);
@@ -132,7 +133,7 @@ class PDF extends Fpdf
         $this->Ln(5);
         $this->SetFont('Arial', '', 8);
         $this->Cell($col_width / 6, 4, '', 0, 0, 'C', false);
-        $this->MultiCell($col_width * 5, 4, $this->observaciones, 0, 'J', false);
+        $this->MultiCell($col_width * 5, 4, utf8_decode($this->observaciones), 0, 'J', false);
 
 
 
@@ -209,8 +210,11 @@ class PDF extends Fpdf
         foreach ($rate as $key => $value) {
             $inven = Inventory::find($value->inventory_id);
             $unidad = Measurementunits::find($inven->measurementunits_id)->name;
+            $this->SetFont('Arial','B', 8);
             $this->Cell($col_width, 7, $inven->numInv, 1, 0, 'C', $fill);
-            $this->Cell($col_width * 2, 7, $inven->descripcion, 1, 0, 'C', $fill);
+            $this->SetFont('Arial','B', 6);
+            $this->Cell($col_width * 2, 7, Str::limit(utf8_decode($inven->descripcion), 34, '...'), 1, 0, 'C', $fill);
+            $this->SetFont('Arial','B', 8);
             $this->Cell($col_width, 7, $unidad, 1, 0, 'C', $fill);
             $this->Cell($col_width, 7, $value->cantidad, 1, 0, 'C', $fill);
             $this->Cell($col_width, 7, $value->costo, 1, 0, 'C', $fill);

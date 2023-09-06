@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('detsols', function (Blueprint $table) {
             $table->id();
-            $table->integer('solicitud_id');
-            $table->integer('inventarios_id');
+            $table->integer('demand_id');
+            $table->integer('inventory_id');
             $table->float('cantidad');
             $table->float('costo');
             $table->float('total');

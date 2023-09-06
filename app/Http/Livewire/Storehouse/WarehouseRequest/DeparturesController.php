@@ -127,36 +127,36 @@ class DeparturesController extends Component
 
     public function Store()
     {
-        // $this->validate($this->rules, $this->messages);
-        // $this->cart = Cart::session(auth()->user()->id)->getContent()->sortBy('name');
+        $this->validate($this->rules, $this->messages);
+        $this->cart = Cart::session(auth()->user()->id)->getContent()->sortBy('name');
 
-        // $requerimiento = Demands::create([
-        //     'user_id' => Auth()->user()->id,
-        //     'total' => Cart::session(auth()->user()->id)->getTotal(),
-        //     'pfstatus' => 'Pendiente',
-        //     'sfstatus' => 'Pendiente',
-        //     'status' => 'Pendiente',
-        //     'obserMat' => '',
-        //     'obserSub' => '',
-        //     'actividad' => $this->observaciones,
-        //     'boss_id' => DepartamentBoss::where('name', 'like', '%'. Auth()->user()->name . '%')->get()[0]->boss_id,
-        // ]);
+        $requerimiento = Demands::create([
+            'user_id' => Auth()->user()->id,
+            'total' => Cart::session(auth()->user()->id)->getTotal(),
+            'pfstatus' => 'Pendiente',
+            'sfstatus' => 'Pendiente',
+            'status' => 'Pendiente',
+            'obserMat' => '',
+            'obserSub' => '',
+            'actividad' => $this->observaciones,
+            'boss_id' => DepartamentBoss::where('name', 'like', '%'. Auth()->user()->name . '%')->get()[0]->boss_id,
+        ]);
 
-        // $this->cart = Cart::session(auth()->user()->id)->getContent()->sortBy('name');
+        $this->cart = Cart::session(auth()->user()->id)->getContent()->sortBy('name');
 
-        // foreach ($this->cart as $key => $value) {
-        //     $inventario = Inventory::find($value->id);
-        //     Detsol::create([
-        //         'demand_id' => $requerimiento->id,
-        //         'inventory_id' => $inventario->id,
-        //         'cantidad' => $value->quantity,
-        //         'costo' => $value->price,
-        //         'total' => $value->quantity * $value->price,
-        //     ]);
-        // }
+        foreach ($this->cart as $key => $value) {
+            $inventario = Inventory::find($value->id);
+            Detsol::create([
+                'demand_id' => $requerimiento->id,
+                'inventory_id' => $inventario->id,
+                'cantidad' => $value->quantity,
+                'costo' => $value->price,
+                'total' => $value->quantity * $value->price,
+            ]);
+        }
 
-        // $this->imprimir($requerimiento->id);
-        $this->imprimir(2);
+        $this->imprimir($requerimiento->id);
+        // $this->imprimir(2);
     }
 
     public function imprimir($id)
