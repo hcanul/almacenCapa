@@ -44,20 +44,16 @@
                         ID
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Proveeder
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Nombre Comercial
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Fecha
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Folio
+                        Usuario
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Total
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                        Actividad
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Fecha
                     <th scope="col" class="px-6 py-3">
                         Action
                     </th>
@@ -70,19 +66,16 @@
                         {{$item->id}}
                     </td>
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{$item->proveedor}}
+                        {{$item->user->name}}
                     </th>
                     <td class="px-6 py-4">
-                        {{$item->nomComer}}
+                        {{"$ " . number_format($item->total, 2)}}
                     </td>
                     <td class="px-6 py-4">
-                        {{$item->fecha}}
+                        {{$item->actividad}}
                     </td>
                     <td class="px-6 py-4">
-                        {{$item->fol_entrada}}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{$item->total}}
+                        {{$item->created_at->format('d-m-Y')}}
                     </td>
                     <td class="px-6 py-4">
                         <div class="flex justify-between">
@@ -114,14 +107,27 @@
             text: '¿CONFIRMAS IMPRIMIR EL REGISTRO?',
             type: 'warning',
             showCancelButton: true,
-            cancelBtuttonText: 'Cerrar',
+            cancelButtonText: 'Cerrar',
             cancelButtonColor: '#fff',
             confirmButtonText: 'Aceptar',
             confirmButtonColor: '#3B3f5C'
         }).then( function (result){
             if (result.value){
-                window.livewire.emit('printerRow', id)
-                swal.close()
+                swal({
+                    input: 'textarea',
+                    inputLabel: 'Capture el motivo de la cancelación',
+                    inputPalceholder: 'Capture el motivo de cancelación...',
+                    inputAttributes: {
+                        'aria-label': 'Capture el motivo de cancelación...'
+                    },
+                    showCancelButton: true,
+                }).then(function (res){
+                    if(res.value){
+                        window.livewire.emit('cancelarReq', [id, res.value])
+                        swal.close()
+                    }
+                });
+
             }
         })
     }

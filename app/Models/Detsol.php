@@ -12,4 +12,9 @@ class Detsol extends Model
     use SoftDeletes;
 
     protected $fillable = [ 'demand_id', 'inventory_id', 'cantidad', 'costo', 'total' ];
+
+    public function inventory()
+    {
+        return $this->belongsTo(Inventory::class);
+    }
 }

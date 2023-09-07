@@ -22,4 +22,9 @@ class Measurementunits extends Model
     {
         return $this->hasMany(WarehouseProduct::class);
     }
+
+    public function detsol()
+    {
+        return $this->hasMany(Detsol::class);
+    }
 }
