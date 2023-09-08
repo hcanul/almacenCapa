@@ -79,15 +79,32 @@
                     </td>
                     <td class="px-6 py-4">
                         <div class="flex justify-between">
-                            <div>
-                                <a href="javascript:void(0)" wire:click='Ver({{$item->id}})' data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                            <div class="mr-5">
+                                <a data-tooltip-target="tooltip-hover" data-tooltip-trigger="hover" href="javascript:void(0)" wire:click='Ver({{$item->id}})' data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                     @include('layouts.themes.icons.eye')
                                 </a>
+                                <div id="tooltip-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    VER DETALLES
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div>
                             </div>
-                            <div>
-                                <a href="javascript:void(0)" onclick='Confirm({{$item->id}})' class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                    @include('layouts.themes.icons.printer')
+                            <div class="mr-5">
+                                <a data-tooltip-target="tooltipaprobar-hover" data-tooltip-trigger="hover" href="javascript:void(0)" onclick='Confirm({{$item->id}})' class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                    @include('layouts.themes.icons.approve')
                                 </a>
+                                <div id="tooltipaprobar-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    APROBAR REQ.
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div>
+                            </div>
+                            <div class="mr-5">
+                                <a data-tooltip-target="tooltipcancelar-hover" data-tooltip-trigger="hover" href="javascript:void(0)" onclick='Confirm({{$item->id}})' class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                    @include('layouts.themes.icons.cancelar')
+                                </a>
+                                <div id="tooltipcancelar-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    CANCELAR REQ.
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div>
                             </div>
                         </div>
                     </td>
@@ -104,7 +121,7 @@
     {
         swal({
             title: 'CONFIRMAR',
-            text: '¿CONFIRMAS IMPRIMIR EL REGISTRO?',
+            text: '¿CONFIRMAS CANCELAR EL REGISTRO?',
             type: 'warning',
             showCancelButton: true,
             cancelButtonText: 'Cerrar',
@@ -114,6 +131,7 @@
         }).then( function (result){
             if (result.value){
                 swal({
+                    title: 'CANCELAR',
                     input: 'textarea',
                     inputLabel: 'Capture el motivo de la cancelación',
                     inputPalceholder: 'Capture el motivo de cancelación...',

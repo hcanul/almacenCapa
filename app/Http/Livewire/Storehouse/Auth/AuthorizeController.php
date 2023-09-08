@@ -24,7 +24,7 @@ class AuthorizeController extends Component
         $this->search = '';
         $this->selected_id = 0;
         $this->pageTitle = 'Listado';
-        $this->componentName = 'SECCIÓN DE ENTRADAS';
+        $this->componentName = 'SECCIÓN DE DETALLES';
     }
 
     public function render()
@@ -53,5 +53,10 @@ class AuthorizeController extends Component
     public function Cancelar($id)
     {
         dd($id[0], $id[1]);
+    }
+
+    public function resetUI()
+    {
+
     }
 }
