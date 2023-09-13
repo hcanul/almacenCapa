@@ -88,24 +88,37 @@
                                     <div class="tooltip-arrow" data-popper-arrow></div>
                                 </div>
                             </div>
-                            <div class="mr-5">
-                                <a data-tooltip-target="tooltipaprobar-hover" data-tooltip-trigger="hover" href="javascript:void(0)" onclick='Confirm({{$item->id}})' class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                    @include('layouts.themes.icons.approve')
-                                </a>
-                                <div id="tooltipaprobar-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                                    APROBAR REQ.
-                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                            @role('SuperUser|SubGerente|JefeMateriales')
+                                <div class="mr-5">
+                                    <a data-tooltip-target="tooltipaprobar-hover" data-tooltip-trigger="hover" href="javascript:void(0)" onclick='Approved({{$item->id}})' class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                        @include('layouts.themes.icons.approve')
+                                    </a>
+                                    <div id="tooltipaprobar-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        APROBAR REQ.
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="mr-5">
-                                <a data-tooltip-target="tooltipcancelar-hover" data-tooltip-trigger="hover" href="javascript:void(0)" onclick='Confirm({{$item->id}})' class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                    @include('layouts.themes.icons.cancelar')
-                                </a>
-                                <div id="tooltipcancelar-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                                    CANCELAR REQ.
-                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                <div class="mr-5">
+                                    <a data-tooltip-target="tooltipcancelar-hover" data-tooltip-trigger="hover" href="javascript:void(0)" onclick='Confirm({{$item->id}})' class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                        @include('layouts.themes.icons.cancelar')
+                                    </a>
+                                    <div id="tooltipcancelar-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        CANCELAR REQ.
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                    </div>
                                 </div>
-                            </div>
+                            @endrole
+                            @role('SuperUser|SubGerente|JefeMateriales|Almcenista')
+                                <div class="mr-5">
+                                    <a data-tooltip-target="tooltipprint-hover" data-tooltip-trigger="hover" href="javascript:void(0)" onclick='Printer({{$item->id}})' class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                        @include('layouts.themes.icons.printer')
+                                    </a>
+                                    <div id="tooltipprint-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        IMPRIMIR SALIDA
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                    </div>
+                                </div>
+                            @endrole
                         </div>
                     </td>
                 </tr>
@@ -150,6 +163,44 @@
         })
     }
 
+    function Approved(id)
+    {
+        swal({
+            title: 'CONFIRMAR',
+            text: '¿CONFIRMAS APROBAR EL REGISTRO?',
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Cerrar',
+            cancelButtonColor: '#fff',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#3B3f5C'
+        }).then( function (result){
+            if (result.value){
+                window.livewire.emit('approvedReq', id)
+                swal.close()
+            }
+        })
+    }
+
+    function Printer(id)
+    {
+        swal({
+            title: 'CONFIRMAR',
+            text: '¿CONFIRMAS IMPRIMIR LA SALIDA?',
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Cerrar',
+            cancelButtonColor: '#fff',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#3B3f5C'
+        }).then( function (result){
+            if (result.value){
+                window.livewire.emit('PrintedReq', id)
+                swal.close()
+            }
+        })
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         const defaultModal = document.getElementById('defaultModal');
         const erElements = document.querySelectorAll('.er');
@@ -171,6 +222,7 @@
         }
 
         function onItemDeleted(msg) {
+            hideModal();
             // noty(msg); // Supongo que noty es una función definida en otro lugar de tu código
         }
 

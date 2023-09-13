@@ -8,7 +8,6 @@ use App\Models\Job;
 use App\Models\Workarea;
 use Livewire\Component;
 use Livewire\WithPagination;
-use PhpParser\Node\Expr\Cast\Bool_;
 
 class BossController extends Component
 {

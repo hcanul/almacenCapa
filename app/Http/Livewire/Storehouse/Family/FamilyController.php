@@ -36,7 +36,7 @@ class FamilyController extends Component
         $this->search = '';
         $this->selected_id = 0;
         $this->pageTitle = 'Listado';
-        $this->componentName = 'SECCIÓN DE ROLES';
+        $this->componentName = 'SECCIÓN DE FAMILIAS ALMACEN';
     }
 
     public function render()
@@ -62,7 +62,7 @@ class FamilyController extends Component
         $this->search = '';
         $this->selected_id = 0;
         $this->pageTitle = 'Listado';
-        $this->componentName = 'SECCIÓN DE FAMEILIAS';
+        $this->componentName = 'SECCIÓN DE FAMEILIAS ALMACEN';
         $this->resetValidation();
         $this->resetPage();
     }

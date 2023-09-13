@@ -69,6 +69,12 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Reimpresión</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('indexAutorizea') }}" class="flex items-center w-full p-2 pl-16 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                        @include('layouts.themes.icons.authSubger')
+                        <span class="flex-1 ml-3 whitespace-nowrap">Autorizar Req.</span>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>

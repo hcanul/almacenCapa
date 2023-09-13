@@ -13,13 +13,15 @@
             @include('layouts.themes.menu.admin')
         </ul>
         @endrole
-        @role('SuperUser|Almacenista')
+        @role('SuperUser|Almacenista|SubGerente|JefeMateriales')
         <ul>
             @include('layouts.themes.menu.almacen')
         </ul>
         @endrole
+        @role('SuperUser|SubGerente|JefeMateriales')
         <ul>
             @include('layouts.themes.menu.authorize')
         </ul>
+        @endrole
     </div>
 </aside>

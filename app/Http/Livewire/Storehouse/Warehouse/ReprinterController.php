@@ -37,7 +37,7 @@ class ReprinterController extends Component
         $this->search = '';
         $this->selected_id = 0;
         $this->pageTitle = 'Listado';
-        $this->componentName = 'SECCIÓN DE ENTRADAS';
+        $this->componentName = 'SECCIÓN DE REQUERIMIENTOS';
     }
 
 

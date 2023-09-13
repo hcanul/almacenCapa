@@ -153,6 +153,8 @@ class DeparturesController extends Component
             ]);
         }
 
+        $this->resetUI();
+        $this->cart = Cart::session(auth()->user()->id)->clear();
         $this->imprimir($requerimiento->id);
     }
 
