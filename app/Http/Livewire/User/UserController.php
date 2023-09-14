@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class UserController extends Component
 {
     use WithPagination;
+    use LivewireAlert;
 
     public $search, $selected_id, $pageTitle, $componentName;
 
@@ -129,6 +131,7 @@ class UserController extends Component
         $user->syncRoles($this->profile);
 
         $this->resetUI();
+        $this->alert('success', 'Usuario Anexado con exito!');
         session()->flash('message', 'Usuario Anexado con exito!');
         $this->emit('item-added', 'Usuario registrada Con Éxito!');
 

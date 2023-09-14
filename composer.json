@@ -13,6 +13,7 @@
         "codedge/laravel-fpdf": "^1.12",
         "darryldecode/cart": "^4.2",
         "guzzlehttp/guzzle": "^7.2",
+        "jantinnerezo/livewire-alert": "^2.2",
         "laravel/framework": "^10.10",
         "laravel/jetstream": "^3.3",
         "laravel/sanctum": "^3.2",
