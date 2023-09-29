@@ -15,7 +15,7 @@
 
         <!-- Styles -->
         @livewireStyles
-        <x-livewire-alert::flash />
+
     </head>
     <body class="font-sans antialiased">
 
@@ -31,5 +31,6 @@
         @stack('modals')
 
         @livewireScripts
+        <x-livewire-alert::flash />
     </body>
 </html>

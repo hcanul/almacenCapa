@@ -46,7 +46,7 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
         });
     });
 
-    Route::middleware(['role_or_permission:SuperUser|Almcenista|SubGerente'])->group(function () {
+    Route::middleware(['role_or_permission:SuperUser|Almacenista|SubGerente'])->group(function () {
         Route::group(['prefix' => 'Almacen'], function(){
             Route::get('Unidades', MeaserementunitControlle::class)->name('indexUnits');
             Route::get('Familias', FamilyController::class)->name('indexFamily');
@@ -57,7 +57,7 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
         });
     });
 
-    Route::middleware(['role_or_permission:SuperUser|Almcenista|SubGerente|JefeMateriales|Usuarios'])->group(function () {
+    Route::middleware(['role_or_permission:SuperUser|Almacenista|SubGerente|JefeMateriales|Usuarios'])->group(function () {
         Route::get('Almacen/Solicitud', DeparturesController::class)->name('indexSolicitud');
         Route::get('requerimiento/{id}',[ExportPdfController::class, 'Requisicion']);
         Route::get('Autorize/almacen', AuthorizeController::class)->name('indexAutorizea');

@@ -60,7 +60,7 @@ class ExportPdfController extends Controller
         /*
         #####################################
         #####################################
-                  Salida de pdf
+                Salida de pdf
         */
 
         $this->fpdf->Output('D', "Requisicion.pdf");

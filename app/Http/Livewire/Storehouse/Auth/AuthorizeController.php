@@ -4,6 +4,7 @@ namespace App\Http\Livewire\StoreHouse\Auth;
 
 use App\Models\Demands;
 use App\Models\Detsol;
+use App\Models\Inventory;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -40,10 +41,15 @@ class AuthorizeController extends Component
             $data = strlen($this->search) > 0 ? Demands::where('created_at', 'like', '%' . $this->search .'%')->wherePfstatus('Aprobado')->whereSfstatus('Pendiente')->paginate($this->pagination):
                                     Demands::orderBy('id', 'asc')->wherePfstatus('Aprobado')->whereSfstatus('Pendiente')->paginate($this->pagination);
         }
-        else
+        else if (auth()->user()->profile == "JefeMateriales")
         {
             $data = strlen($this->search) > 0 ? Demands::where('created_at', 'like', '%' . $this->search .'%')->wherePfstatus('Pendiente')->paginate($this->pagination):
                                     Demands::orderBy('id', 'asc')->wherePfstatus('Pendiente')->paginate($this->pagination);
+        }
+        else if (auth()->user()->profile == "Almacenista")
+        {
+            $data = strlen($this->search) > 0 ? Demands::where('created_at', 'like', '%' . $this->search .'%')->wherePfstatus('Pendiente')->paginate($this->pagination):
+                                    Demands::orderBy('id', 'asc')->whereStatus('Pendiente')->paginate($this->pagination);
         }
 
         return view('livewire.storehouse.auth.component',
@@ -70,10 +76,39 @@ class AuthorizeController extends Component
         $this->emit('item-added', 'Requerimiento Cancelado Con Éxito!');
     }
 
+    protected function factibilidad($id)
+    {
+        $articulos = Detsol::whereDemandId($id)->get();
+        foreach ($articulos as $key => $value) {
+            if (Inventory::find($value['inventory_id'])->existencia < $value->cantidad);
+                return false;
+        }
+        return true;
+    }
+
     public function Aprobar($id)
     {
-        auth()->user()->profile == "SubGerente" ? Demands::find($id)->update(['sfstatus' => 'Aprobado']) : Demands::find($id)->update(['pfstatus' => 'Aprobado']);
-        //Demands::find($id)->update(['pfstatus' => 'Aprobado']);
+        if (auth()->user()->profile == "SubGerente")
+            Demands::find($id)->update(['sfstatus' => 'Aprobado']);
+        else if (auth()->user()->profile == "JefeMAteriales")
+            Demands::find($id)->update(['pfstatus' => 'Aprobado']);
+        else if (auth()->user()->profile == "Almacenista")
+        {
+            $respuesta = $this->factibilidad($id);
+            if ($respuesta)
+            {
+                Demands::find($id)->update(['status' => 'Aprobado']);
+            }
+            else
+            {
+                Demands::find($id)->update(['status' => 'MatIns']);
+                $this->resetUI();
+                session()->flash('delete', "Requerimiento Núm: $id Cancelado por almacen, Mat. Insuficiente con exito!");
+                $this->emit('item-canceled', 'Material Insuficiente!!');
+                return ;
+            }
+        }
+
         $this->resetUI();
         session()->flash('message', "Requerimiento Núm: $id Aprobado con exito!");
         $this->emit('item-added', 'Requerimiento Aprobado Con Éxito!');

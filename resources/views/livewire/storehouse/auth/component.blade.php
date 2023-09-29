@@ -88,7 +88,7 @@
                                     <div class="tooltip-arrow" data-popper-arrow></div>
                                 </div>
                             </div>
-                            @role('SuperUser|SubGerente|JefeMateriales')
+                            @role('SuperUser|SubGerente|JefeMateriales|Almacenista')
                                 <div class="mr-5">
                                     <a data-tooltip-target="tooltipaprobar-hover" data-tooltip-trigger="hover" href="javascript:void(0)" onclick='Approved({{$item->id}})' class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                         @include('layouts.themes.icons.approve')
@@ -98,6 +98,8 @@
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
                                 </div>
+                            @endrole
+                            @role('SuperUser|SubGerente|JefeMateriales')
                                 <div class="mr-5">
                                     <a data-tooltip-target="tooltipcancelar-hover" data-tooltip-trigger="hover" href="javascript:void(0)" onclick='Confirm({{$item->id}})' class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                         @include('layouts.themes.icons.cancelar')
@@ -108,17 +110,19 @@
                                     </div>
                                 </div>
                             @endrole
-                            @role('SuperUser|SubGerente|JefeMateriales|Almcenista')
-                                <div class="mr-5">
-                                    <a data-tooltip-target="tooltipprint-hover" data-tooltip-trigger="hover" href="javascript:void(0)" onclick='Printer({{$item->id}})' class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                        @include('layouts.themes.icons.printer')
-                                    </a>
-                                    <div id="tooltipprint-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                                        IMPRIMIR SALIDA
-                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                            @if ($item->pfstatus == 'Aprobado' && $item->sfstatus == 'Aprobado' && $item->status == 'Aprobado')
+                                @role('SuperUser|SubGerente|JefeMateriales|Almacenista')
+                                    <div class="mr-5">
+                                        <a data-tooltip-target="tooltipprint-hover" data-tooltip-trigger="hover" href="javascript:void(0)" onclick='Printer({{$item->id}})' class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                            @include('layouts.themes.icons.printer')
+                                        </a>
+                                        <div id="tooltipprint-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                            IMPRIMIR SALIDA
+                                            <div class="tooltip-arrow" data-popper-arrow></div>
+                                        </div>
                                     </div>
-                                </div>
-                            @endrole
+                                @endrole
+                            @endif
                         </div>
                     </td>
                 </tr>
@@ -226,9 +230,18 @@
             // noty(msg); // Supongo que noty es una función definida en otro lugar de tu código
         }
 
+        function onItemCancelado(msg){
+            swal({
+                title:'Cancelado',
+                text:msg,
+                type:'warning',
+            });
+        }
+
         window.livewire.on('item-added', onItemAdded);
         window.livewire.on('item-updated', onItemUpdated);
         window.livewire.on('item-deleted', onItemDeleted);
+        window.livewire.on('item-canceled', onItemCancelado);
         window.livewire.on('hide-modal', hideModal);
         window.livewire.on('show-modal', showModal);
     });
