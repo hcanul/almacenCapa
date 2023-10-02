@@ -54,6 +54,22 @@
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Fecha
+                    </th>
+                    @if(auth()->user()->profile === 'SuperUser')
+                        <th scope="col" class="px-6 py-3">
+                            DepMatStatus
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            SubAdminStatus
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            AlmaStatus
+                        </th>
+                    @else
+                        <th scope="col" class="px-6 py-3">
+                            Estatus
+                        </th>
+                    @endif
                     <th scope="col" class="px-6 py-3">
                         Action
                     </th>
@@ -77,13 +93,96 @@
                     <td class="px-6 py-4">
                         {{$item->created_at->format('d-m-Y')}}
                     </td>
+                    @if (auth()->user()->profile == "SubGerente")
+                        @if ($item->sfstatus == 'Pendiente')
+                            <td class="px-6 py-4 ">
+                                <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{{$item->sfstatus}}</span>
+                            </td>
+                        @elseif ($item->sfstatus == 'Aprobado')
+                            <td class="px-6 py-4 ">
+                                <span class="bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-indigo-400 border border-indigo-400">{{$item->sfstatus}}</span>
+                            </td>
+                        @else
+                            <td class="px-6 py-4">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">{{$item->sfstatus}}</span>
+                            </td>
+                        @endif
+                    @elseif (auth()->user()->profile == "JefeMateriales")
+                        @if ($item->pfstatus == 'Pendiente')
+                            <td class="px-6 py-4 ">
+                                <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{{$item->pfstatus}}</span>
+                            </td>
+                        @elseif ($item->pfstatus == 'Aprobado')
+                            <td class="px-6 py-4 ">
+                                <span class="bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-indigo-400 border border-indigo-400">{{$item->pfstatus}}</span>
+                            </td>
+                        @else
+                            <td class="px-6 py-4">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">{{$item->pfstatus}}</span>
+                            </td>
+                        @endif
+                    @elseif (auth()->user()->profile == "Almacenista")
+                        @if ($item->status == 'Pendiente')
+                            <td class="px-6 py-4 ">
+                                <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{{$item->status}}</span>
+                            </td>
+                        @elseif ($item->status == 'Aprobado')
+                            <td class="px-6 py-4 ">
+                                <span class="bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-indigo-400 border border-indigo-400">{{$item->status}}</span>
+                            </td>
+                        @else
+                            <td class="px-6 py-4">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">{{$item->status}}</span>
+                            </td>
+                        @endif
+                    @else
+                        @if ($item->sfstatus == 'Pendiente')
+                            <td class="px-6 py-4 ">
+                                <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{{$item->sfstatus}}</span>
+                            </td>
+                        @elseif ($item->sfstatus == 'Aprobado')
+                            <td class="px-6 py-4 ">
+                                <span class="bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-indigo-400 border border-indigo-400">{{$item->sfstatus}}</span>
+                            </td>
+                        @else
+                            <td class="px-6 py-4">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">{{$item->sfstatus}}</span>
+                            </td>
+                        @endif
+                        @if ($item->pfstatus == 'Pendiente')
+                            <td class="px-6 py-4 ">
+                                <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{{$item->pfstatus}}</span>
+                            </td>
+                        @elseif ($item->pfstatus == 'Aprobado')
+                            <td class="px-6 py-4 ">
+                                <span class="bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-indigo-400 border border-indigo-400">{{$item->pfstatus}}</span>
+                            </td>
+                        @else
+                            <td class="px-6 py-4">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">{{$item->pfstatus}}</span>
+                            </td>
+                        @endif
+                        @if ($item->status == 'Pendiente')
+                            <td class="px-6 py-4 ">
+                                <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{{$item->status}}</span>
+                            </td>
+                        @elseif ($item->status == 'Aprobado')
+                            <td class="px-6 py-4 ">
+                                <span class="bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-indigo-400 border border-indigo-400">{{$item->status}}</span>
+                            </td>
+                        @else
+                            <td class="px-6 py-4">
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-400 border border-gray-500">{{$item->status}}</span>
+                            </td>
+                        @endif
+                    @endif
                     <td class="px-6 py-4">
                         <div class="flex justify-between">
                             <div class="mr-5">
                                 <a data-tooltip-target="tooltip-hover" data-tooltip-trigger="hover" href="javascript:void(0)" wire:click='Ver({{$item->id}})' data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                     @include('layouts.themes.icons.eye')
                                 </a>
-                                <div id="tooltip-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                <div id="tooltip-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-black bg-gray-900 rounded-lg shadow-sm opacity-0 dark:text-white tooltip dark:bg-gray-700">
                                     VER DETALLES
                                     <div class="tooltip-arrow" data-popper-arrow></div>
                                 </div>
@@ -93,7 +192,7 @@
                                     <a data-tooltip-target="tooltipaprobar-hover" data-tooltip-trigger="hover" href="javascript:void(0)" onclick='Approved({{$item->id}})' class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                         @include('layouts.themes.icons.approve')
                                     </a>
-                                    <div id="tooltipaprobar-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    <div id="tooltipaprobar-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-black bg-gray-900 rounded-lg shadow-sm opacity-0 dark:text-white tooltip dark:bg-gray-700">
                                         APROBAR REQ.
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
@@ -104,7 +203,7 @@
                                     <a data-tooltip-target="tooltipcancelar-hover" data-tooltip-trigger="hover" href="javascript:void(0)" onclick='Confirm({{$item->id}})' class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                         @include('layouts.themes.icons.cancelar')
                                     </a>
-                                    <div id="tooltipcancelar-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    <div id="tooltipcancelar-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium bg-gray-900 rounded-lg shadow-sm opacity-0 text-blakc dark:text-white tooltip dark:bg-gray-700">
                                         CANCELAR REQ.
                                         <div class="tooltip-arrow" data-popper-arrow></div>
                                     </div>
@@ -116,7 +215,7 @@
                                         <a data-tooltip-target="tooltipprint-hover" data-tooltip-trigger="hover" href="javascript:void(0)" onclick='Printer({{$item->id}})' class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                             @include('layouts.themes.icons.printer')
                                         </a>
-                                        <div id="tooltipprint-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        <div id="tooltipprint-hover" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-black bg-gray-900 rounded-lg shadow-sm opacity-0 dark:text-white tooltip dark:bg-gray-700">
                                             IMPRIMIR SALIDA
                                             <div class="tooltip-arrow" data-popper-arrow></div>
                                         </div>

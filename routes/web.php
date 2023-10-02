@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ExportPdfController;
+use App\Http\Controllers\SalidaToPdfController;
 use App\Http\Livewire\Asignar\AsignarController;
 use App\Http\Livewire\Permisos\PermisosController;
 use App\Http\Livewire\Role\RoleController;
@@ -64,9 +65,10 @@ Route::middleware([ 'auth:sanctum', config('jetstream.auth_session'), 'verified'
     });
 
     Route::middleware(['role_or_permission:SuperUser|JefeMateriales|SubGerente'])->group( function () {
-        Route::group(['prefix' => 'Administración'], function(){
+        Route::group(['prefix' => 'Administracion'], function(){
             Route::get('Autorize/Materiales', AuthorizeController::class)->name('indexAutorize');
             Route::get('Autorize/subgerente', AuthorizeController::class)->name('indexAutorizes');
+            Route::get('Salida/{id}', [SalidaToPdfController::class, 'Salida']);
         });
     });
 });
